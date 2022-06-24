@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".ui.login.LoginActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="1dp"
+        android:hint="@string/user"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="231dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/textInputLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:hint="@string/password"
+        app:endIconMode="password_toggle"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_editor_absoluteY="231dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_gravity="start"
+        android:enabled="false"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/continuar"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_conOlv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintVertical_bias="0.703" />
+
+    <Button
+        android:id="@+id/login_google"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/iniciar_SG"
+        android:textSize="20sp"
+        app:icon="@drawable/google_logo"
+        app:layout_constraintBottom_toTopOf="@+id/login_face"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.145" />
+
+    <Button
+        android:id="@+id/login_face"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_gravity="start"
+        android:layout_marginBottom="112dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/iniciar_SF"
+        android:textSize="20sp"
+        app:icon="@drawable/face_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_reg"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/reg"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_conOlv"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="192dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="336dp"
+        android:text="@string/forgot_pass"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="210dp"
+        android:layout_height="45dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/titulo"
+        android:textSize="33sp"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.557" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="o"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_conOlv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
