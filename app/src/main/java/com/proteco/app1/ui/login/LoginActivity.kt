@@ -12,26 +12,40 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.proteco.app1.databinding.ActivityLoginBinding
 
 import com.proteco.app1.R
+import com.proteco.app1.databinding.DialogRegBinding
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding2: DialogRegBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding2 = DialogRegBinding.inflate(layoutInflater)
+        setContentView(binding2.root)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val username = binding.username
-        val et_pass = binding.etPass
+        val etPass = binding.etPass
         val login = binding.login
         val loading = binding.loading
-        val et_user = binding.etUser
+        val etUser = binding.etUser
+        val registrarB = binding.btnReg
+        val registrarCon = binding2.conBtn
+        val regCPass = binding2.passCReg
+        val regPass = binding2.passReg
+        val regUser = binding2.userReg
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -43,10 +57,10 @@ class LoginActivity : AppCompatActivity() {
             login.isEnabled = loginState.isDataValid
 
             if (loginState.usernameError != null) {
-                et_user?.error = getString(loginState.usernameError)
+                etUser?.error = getString(loginState.usernameError)
             }
             if (loginState.passwordError != null) {
-                et_pass?.error = getString(loginState.passwordError)
+                etPass?.error = getString(loginState.passwordError)
             }
         })
 
@@ -66,18 +80,18 @@ class LoginActivity : AppCompatActivity() {
             finish()
         })
 
-        et_user?.afterTextChanged {
+        etUser?.afterTextChanged {
             loginViewModel.loginDataChanged(
-                et_user.text.toString(),
-                et_pass?.text.toString()
+                etUser.text.toString(),
+                etPass?.text.toString()
             )
         }
 
-        et_pass!!.apply {
+        etPass!!.apply {
             afterTextChanged {
                 loginViewModel.loginDataChanged(
-                    et_user?.text.toString(),
-                    et_pass.text.toString()
+                    etUser?.text.toString(),
+                    etPass.text.toString()
                 )
             }
 
@@ -85,8 +99,8 @@ class LoginActivity : AppCompatActivity() {
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
                         loginViewModel.login(
-                            et_user?.text.toString(),
-                            et_pass?.text.toString()
+                            etUser?.text.toString(),
+                            etPass.text.toString()
                         )
                 }
                 false
@@ -94,7 +108,11 @@ class LoginActivity : AppCompatActivity() {
 
             login.setOnClickListener {
                 //loading.visibility = View.VISIBLE
-                loginViewModel.login(et_user?.text.toString(), et_pass?.text.toString())
+                loginViewModel.login(etUser?.text.toString(), etPass.text.toString())
+            }
+
+            registrarB?.setOnClickListener{
+                showCreateDialog()
             }
         }
     }
@@ -113,6 +131,22 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
+
+    private fun showCreateDialog(){
+        val fragmentManager = supportFragmentManager
+        val newFragment = DialogReg()
+        // The device is smaller, so show the fragment fullscreen
+        val transaction = fragmentManager.beginTransaction()
+        // For a little polish, specify a transition animation
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        // To make it fullscreen, use the 'content' root view as the container
+        // for the fragment, which is always the root view for the activity
+        transaction
+            .add(android.R.id.content, newFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
 }
 
 /**

@@ -13,10 +13,16 @@
 
 
     <string name="continuar">Continuar</string>
+    <string name="sexo">Sexo:</string>
+    <string name="sexo_h">Hombre</string>
+    <string name="sexo_m">Mujer</string>
+    <string name="sexo_o">Otro</string>
     <string name="iniciar_SG">Iniciar sesión con Google</string>
     <string name="iniciar_SF">Iniciar sesión con Facebook</string>
     <string name="user">"Usuario"</string>
     <string name="password">"Ingrese su contraseña"</string>
+    <string name="passwordCr">"Cree una contraseña"</string>
+    <string name="passwordCo">"Confirme la contraseña"</string>
     <string name="reg">"Registrarse"</string>
     <string name="forgot_pass">"¿Olvidaste tu usuario o contraseña?"</string>
 </resources>
