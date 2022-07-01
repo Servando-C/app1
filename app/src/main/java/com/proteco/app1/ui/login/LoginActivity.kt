@@ -1,6 +1,7 @@
 package com.proteco.app1.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,14 +9,11 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.proteco.app1.MainActivity
 import com.proteco.app1.databinding.ActivityLoginBinding
 
 import com.proteco.app1.R
@@ -25,13 +23,11 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var binding2: DialogRegBinding
+
+    val credenciales = mutableListOf<String>("Juan123", "orejas123", "Naomi14", "4lan", "Al1n_", "SyA2623", "Ultimo14", "penultimo18")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding2 = DialogRegBinding.inflate(layoutInflater)
-        setContentView(binding2.root)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -42,10 +38,6 @@ class LoginActivity : AppCompatActivity() {
         val loading = binding.loading
         val etUser = binding.etUser
         val registrarB = binding.btnReg
-        val registrarCon = binding2.conBtn
-        val regCPass = binding2.passCReg
-        val regPass = binding2.passReg
-        val regUser = binding2.userReg
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -77,7 +69,9 @@ class LoginActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK)
 
             //Complete and destroy login activity once successful
-            finish()
+            //finish()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         })
 
         etUser?.afterTextChanged {
@@ -114,6 +108,7 @@ class LoginActivity : AppCompatActivity() {
             registrarB?.setOnClickListener{
                 showCreateDialog()
             }
+
         }
     }
 

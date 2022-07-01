@@ -17,6 +17,7 @@
         android:layout_width="210dp"
         android:layout_height="45dp"
         android:layout_marginTop="70dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/reg"
         android:textSize="33sp"
@@ -31,15 +32,32 @@
         android:id="@+id/user_Reg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:hint="@string/user"
         app:hintAnimationEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/pass_Reg"
+        app:layout_constraintBottom_toTopOf="@id/email_Reg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_Reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/prompt_email"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintBottom_toTopOf="@id/pass_Reg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_Reg">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -54,9 +72,10 @@
         app:layout_constraintBottom_toTopOf="@id/passC_Reg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_Reg">
+        app:layout_constraintTop_toBottomOf="@id/email_Reg">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_Contra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>
@@ -76,6 +95,7 @@
         tools:layout_editor_absoluteY="323dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_CContra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>
@@ -86,7 +106,7 @@
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:layout_gravity="start"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="104dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/continuar"
         android:textSize="22sp"
@@ -98,13 +118,12 @@
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleButton"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:singleSelection="true"
-        app:selectionRequired="true"
-        android:layout_marginBottom="50dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/con_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:singleSelection="true">
 
         <Button
             android:id="@+id/btn_hombre"
