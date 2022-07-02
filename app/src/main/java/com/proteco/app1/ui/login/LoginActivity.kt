@@ -21,10 +21,9 @@ import com.proteco.app1.databinding.DialogRegBinding
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
 
-    val credenciales = mutableListOf<String>("Juan123", "orejas123", "Naomi14", "4lan", "Al1n_", "SyA2623", "Ultimo14", "penultimo18")
+    private val credenciales = mutableListOf<String>("Juan123", "orejas123", "Naomi14", "4lan", "Al1n_", "SyA2623", "Ultimo14", "penultimo18")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,99 +31,55 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = binding.username
+        val etUser = binding.etUser
         val etPass = binding.etPass
         val login = binding.login
-        val loading = binding.loading
-        val etUser = binding.etUser
         val registrarB = binding.btnReg
+        val google = binding.loginGoogle
+        val facebook = binding.loginFace
+        val forgotPass = binding.btnConOlv
+        val gato = binding.gato
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
-
-        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
-            val loginState = it ?: return@Observer
-
-            // disable login button unless both username / password is valid
-            login.isEnabled = loginState.isDataValid
-
-            if (loginState.usernameError != null) {
-                etUser?.error = getString(loginState.usernameError)
-            }
-            if (loginState.passwordError != null) {
-                etPass?.error = getString(loginState.passwordError)
-            }
-        })
-
-        loginViewModel.loginResult.observe(this@LoginActivity, Observer {
-            val loginResult = it ?: return@Observer
-
-            //loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
-            }
-            if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-            }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            //finish()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        })
-
-        etUser?.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                etUser.text.toString(),
-                etPass?.text.toString()
-            )
-        }
-
-        etPass!!.apply {
-            afterTextChanged {
-                loginViewModel.loginDataChanged(
-                    etUser?.text.toString(),
-                    etPass.text.toString()
-                )
-            }
-
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
-                            etUser?.text.toString(),
-                            etPass.text.toString()
-                        )
+        //Complete and destroy login activity once successful
+        //finish()
+        login.setOnClickListener {
+            if (credenciales.contains(etUser?.text.toString())){
+                var id = credenciales.indexOf(etUser?.text.toString())
+                if (credenciales[id] == etUser?.text.toString() && credenciales[id+1] == etPass?.text.toString()){
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("usuario", etUser?.text.toString())
+                    startActivity(intent)
+                    finish()
                 }
-                false
+            }else{
+                Toast.makeText(applicationContext, R.string.login_failed, Toast.LENGTH_SHORT).show()
             }
-
-            login.setOnClickListener {
-                //loading.visibility = View.VISIBLE
-                loginViewModel.login(etUser?.text.toString(), etPass.text.toString())
-            }
-
-            registrarB?.setOnClickListener{
-                showCreateDialog()
-            }
-
         }
-    }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
-    }
+        gato?.setOnClickListener{
+            Toast.makeText(applicationContext, R.string.miau, Toast.LENGTH_SHORT).show()
+        }
 
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+        google?.setOnClickListener {
+            Toast.makeText(applicationContext, R.string.reedireccion, Toast.LENGTH_SHORT).show()
+        }
+
+        facebook?.setOnClickListener {
+            Toast.makeText(applicationContext, R.string.reedireccion, Toast.LENGTH_SHORT).show()
+        }
+
+        forgotPass?.setOnClickListener {
+            if (etUser?.text?.isEmpty() == true){
+                Toast.makeText(applicationContext, R.string.invalid_username, Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(applicationContext, R.string.success_login, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        registrarB?.setOnClickListener{
+            showCreateDialog()
+        }
+
     }
 
     private fun showCreateDialog(){
@@ -141,20 +96,4 @@ class LoginActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
-
-}
-
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
 }

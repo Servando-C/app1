@@ -9,7 +9,7 @@
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Nombre de usuario inválido</string>
     <string name="invalid_password">Deben ser más de 5 caracteres</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="login_failed">"Error de usuario o contraseña"</string>
 
 
     <string name="continuar">Continuar</string>
@@ -29,4 +29,10 @@
     <string name="notEqPass">"Las contraseñas tienen que ser iguales"</string>
     <string name="datos_incom">"Los campos deben estar llenos"</string>
     <string name="last_miss">"Debe seleccionar el ultimo campo"</string>
+    <string name="info">"Obteniendo informacion adicional del usuario..."</string>
+    <string name="ubicacion">"Localizacion no disponible"</string>
+    <string name="reedireccion">"Será reedirigido en un momento"</string>
+    <string name="miau">"miau"</string>
+
+
 </resources>

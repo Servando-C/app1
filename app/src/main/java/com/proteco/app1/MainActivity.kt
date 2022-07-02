@@ -2,10 +2,19 @@ package com.proteco.app1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.proteco.app1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val user = binding.usuarioIni
+        val usuario = intent.getStringExtra("usuario")
+
+        user.text = "Hola $usuario"
     }
 }
